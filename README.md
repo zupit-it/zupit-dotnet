@@ -1,1 +1,2 @@
-# zupit-dotnet
+# Zupit .NET monorepo
+

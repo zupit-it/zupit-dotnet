@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "lint-staged": "^13.0.4",
+    "prettier": "^3.1.0",
+    "sort-json": "^2.0.1"
+  },
+  "scripts": {
+    "pre-commit": "lint-staged",
+    "version-endpoint:pack": "dotnet pack Zupit.VersionEndpoint"
+  }
+}
