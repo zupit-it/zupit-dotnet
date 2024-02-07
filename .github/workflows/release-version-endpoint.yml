@@ -1,0 +1,19 @@
+name: Release version endpoint workflow
+
+on:
+  push:
+    branches:
+      - main
+      - release/**
+    paths:
+      - Zupit.VersionEndpoint/**
+  workflow_dispatch:
+
+jobs:
+  release-version-endpoint:
+    uses: ./.github/workflows/release-common.yml
+    with:
+      DOTNET_IMAGE: 'mcr.microsoft.com/dotnet/sdk:8.0.101-alpine3.18-amd64'
+      WORKING_DIRECTORY: Zupit.VersionEndpoint
+      PROJECT: Zupit.VersionEndpoint
+    secrets: inherit

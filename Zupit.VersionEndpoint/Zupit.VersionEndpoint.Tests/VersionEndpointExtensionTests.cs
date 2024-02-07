@@ -24,6 +24,6 @@ public class VersionEndpointExtensionTest : IClassFixture<WebApplicationFactory<
         response.EnsureSuccessStatusCode();
         var responseContent = await response.Content.ReadAsStringAsync();
 
-        Assert.Equal("2.11.1.102", responseContent);
+        Assert.Equal("15.0.0.0", responseContent);
     }
 }

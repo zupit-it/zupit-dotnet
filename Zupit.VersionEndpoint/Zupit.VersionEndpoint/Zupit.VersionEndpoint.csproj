@@ -8,18 +8,21 @@
 
     <PropertyGroup>
         <PackageId>Zupit.VersionEndpoint</PackageId>
-        <Version>0.0.1-alpha</Version>
+        <Version>0.0.2-alpha</Version>
         <Authors>Zupit Developers</Authors>
         <Company>Zupit</Company>
         <PackageTags>Version;Endpoint;Zupit</PackageTags>
         <Description>Zupit.VersionEndpoint adds an API endpoint returing the app assembly version.</Description>
         <Copyright>Copyright (c) Zupit 2024</Copyright>
         <PackageProjectUrl>https://github.com/zupit-it/zupit-dotnet</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/zupit-it/zupit-dotnet.git</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="../../icon.png" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
     <ItemGroup>
