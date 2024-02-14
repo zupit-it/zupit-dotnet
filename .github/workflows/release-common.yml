@@ -1,4 +1,4 @@
-name: Release common workflow
+name: Release workflow
 
 on:
   workflow_call:
@@ -12,25 +12,28 @@ on:
       DOTNET_IMAGE:
         required: true
         type: string
+      PROJECT_NAME_COMMIT_SUFFIX:
+        required: true
+        type: string
 
 jobs:
+  test:
+    uses: ./.github/workflows/test-common.yml
+    with:
+      DOTNET_IMAGE: ${{ inputs.DOTNET_IMAGE }}
+      WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
+  publish-new-version:
+    needs: [ test ]
+    uses: ./.github/workflows/publish-new-version-common.yml
+    with:
+      WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
+      PROJECT_NAME_COMMIT_SUFFIX: ${{ inputs.PROJECT_NAME_COMMIT_SUFFIX }}
   release:
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ inputs.DOTNET_IMAGE }}
-    defaults:
-      run:
-        working-directory: ${{ inputs.WORKING_DIRECTORY }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run tests
-        run: dotnet test
-
-      - name: Create NuGet package
-        run: dotnet pack -c Release -o ./artifacts/${{ inputs.PROJECT }} ${{ inputs.PROJECT }}
-
-      - name: Publish NuGet package
-        run: dotnet nuget push ./artifacts/${{ inputs.PROJECT }}/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.ZUPIT_NUGET_TOKEN }}
+    needs: [ test, publish-new-version ]
+    if: needs.publish-new-version.outputs.OUTCOME == 'success'
+    uses: ./.github/workflows/release-nuget-common.yml
+    with:
+      DOTNET_IMAGE: ${{ inputs.DOTNET_IMAGE }}
+      WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
+      PROJECT: ${{ inputs.PROJECT }}
+    secrets: inherit

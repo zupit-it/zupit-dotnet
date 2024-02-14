@@ -4,7 +4,7 @@ This library adds a version endpoint to your ASP.NET Core application. The versi
 The endpoint is accessible via `GET /version` and returns a string with the version. You can customize the endpoint path.
 
 ## Prerequisites
-- .NET 7 or later
+- .NET 7 or later 
 
 ## Installation
 ```

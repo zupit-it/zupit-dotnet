@@ -1,0 +1,48 @@
+name: Bump Version common workflow
+
+on:
+  workflow_call:
+    inputs:
+      WORKING_DIRECTORY:
+        required: true
+        type: string
+      PROJECT_NAME_COMMIT_SUFFIX:
+        required: true
+        type: string
+    outputs:
+      OUTCOME:
+        description: "Outcome of the versionize action, 'success' if a new version was published"
+        value: ${{ jobs.publish-new-version.outputs.OUTCOME }}
+
+jobs:
+  publish-new-version:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.WORKING_DIRECTORY }}
+    outputs:
+      OUTCOME: ${{ steps.versionize.outcome }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+      - name: Install Versionize
+        run: dotnet tool install --global Versionize
+      - name: Setup git
+        run: |
+          git config --local user.email "zupitdevs@users.noreply.github.com"
+          git config --local user.name "ZupitDevs"
+      - name: Versionize Release
+        id: versionize
+        run: versionize --changelog-all --exit-insignificant-commits --proj-version-bump-logic --skip-tag --commit-suffix "[${{ inputs.PROJECT_NAME_COMMIT_SUFFIX }}]"
+        continue-on-error: true
+      - name: No release required
+        if: steps.versionize.outcome != 'success'
+        run: echo "Skipping publishing. No release required."
+      - name: Push changes to GitHub
+        if: steps.versionize.outcome == 'success'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true

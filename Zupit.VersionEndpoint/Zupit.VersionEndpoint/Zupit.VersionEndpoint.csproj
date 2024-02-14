@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
@@ -8,7 +8,7 @@
 
     <PropertyGroup>
         <PackageId>Zupit.VersionEndpoint</PackageId>
-        <Version>0.0.2-alpha</Version>
+        <Version>0.0.2</Version>
         <Authors>Zupit Developers</Authors>
         <Company>Zupit</Company>
         <PackageTags>Version;Endpoint;Zupit</PackageTags>
@@ -21,11 +21,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
-        <None Include="../../icon.png" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="../../icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 </Project>

@@ -10,10 +10,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  release-version-endpoint:
+  release-common:
     uses: ./.github/workflows/release-common.yml
     with:
       DOTNET_IMAGE: 'mcr.microsoft.com/dotnet/sdk:8.0.101-alpine3.18-amd64'
       WORKING_DIRECTORY: Zupit.VersionEndpoint
       PROJECT: Zupit.VersionEndpoint
+      PROJECT_NAME_COMMIT_SUFFIX: VersionEndpoint
     secrets: inherit
