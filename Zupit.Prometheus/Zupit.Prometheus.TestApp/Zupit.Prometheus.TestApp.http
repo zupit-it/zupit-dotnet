@@ -1,0 +1,6 @@
+@Zupit.Prometheus.TestApp_HostAddress = http://localhost:5128
+
+GET {{Zupit.Prometheus.TestApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

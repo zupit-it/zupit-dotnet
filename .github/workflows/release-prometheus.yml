@@ -1,4 +1,4 @@
-name: Release version endpoint workflow
+name: Release prometheus workflow
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
       - release/**
     paths:
-      - Zupit.VersionEndpoint/**
+      - Zupit.Prometheus/**
   workflow_dispatch:
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
     uses: ./.github/workflows/common-release.yml
     with:
       DOTNET_IMAGE: 'mcr.microsoft.com/dotnet/sdk:8.0.101-alpine3.18-amd64'
-      WORKING_DIRECTORY: Zupit.VersionEndpoint
-      PROJECT: Zupit.VersionEndpoint
-      PROJECT_NAME_COMMIT_SUFFIX: VersionEndpoint
+      WORKING_DIRECTORY: Zupit.Prometheus
+      PROJECT: Zupit.Prometheus
+      PROJECT_NAME_COMMIT_SUFFIX: Prometheus
     secrets: inherit

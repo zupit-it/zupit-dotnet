@@ -29,8 +29,8 @@ jobs:
       - name: Create NuGet package
         run: dotnet pack -c Release -o ./artifacts/${{ inputs.PROJECT }} ${{ inputs.PROJECT }}
 
-      # - name: Publish NuGet package
-      #   run: dotnet nuget push ./artifacts/${{ inputs.PROJECT }}/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.ZUPIT_NUGET_TOKEN }}
+      - name: Publish NuGet package
+        run: dotnet nuget push ./artifacts/${{ inputs.PROJECT }}/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.ZUPIT_NUGET_TOKEN }}
 
       - name: Publish NuGet package test
         run: echo "Publish to Nuget"

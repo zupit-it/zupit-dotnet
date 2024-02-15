@@ -18,20 +18,20 @@ on:
 
 jobs:
   test:
-    uses: ./.github/workflows/test-common.yml
+    uses: ./.github/workflows/common-test.yml
     with:
       DOTNET_IMAGE: ${{ inputs.DOTNET_IMAGE }}
       WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
   publish-new-version:
     needs: [ test ]
-    uses: ./.github/workflows/publish-new-version-common.yml
+    uses: ./.github/workflows/common-publish-new-version.yml
     with:
       WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
       PROJECT_NAME_COMMIT_SUFFIX: ${{ inputs.PROJECT_NAME_COMMIT_SUFFIX }}
   release:
     needs: [ test, publish-new-version ]
     if: needs.publish-new-version.outputs.OUTCOME == 'success'
-    uses: ./.github/workflows/release-nuget-common.yml
+    uses: ./.github/workflows/common-release-nuget.yml
     with:
       DOTNET_IMAGE: ${{ inputs.DOTNET_IMAGE }}
       WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
