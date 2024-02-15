@@ -13,6 +13,9 @@ on:
       OUTCOME:
         description: "Outcome of the versionize action, 'success' if a new version was published"
         value: ${{ jobs.publish-new-version.outputs.OUTCOME }}
+      COMMIT_SHA:
+        description: "The SHA of the commit that was used to commit the new version"
+        value: ${{ jobs.publish-new-version.outputs.COMMIT_SHA }}
 
 jobs:
   publish-new-version:
@@ -22,6 +25,7 @@ jobs:
         working-directory: ${{ inputs.WORKING_DIRECTORY }}
     outputs:
       OUTCOME: ${{ steps.versionize.outcome }}
+      COMMIT_SHA: ${{ steps.latest_commit.outputs.commit_sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,3 +50,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           tags: true
+      - name: Get latest commit SHA
+        if: steps.versionize.outcome == 'success'
+        id: latest_commit
+        run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"

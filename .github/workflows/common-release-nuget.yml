@@ -3,6 +3,10 @@ name: Release to nuget
 on:
   workflow_call:
     inputs:
+      COMMIT_SHA:
+        description: 'The commit SHA to release'
+        required: true
+        type: string
       WORKING_DIRECTORY:
         required: true
         type: string
@@ -25,12 +29,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.COMMIT_SHA }}
 
       - name: Create NuGet package
         run: dotnet pack -c Release -o ./artifacts/${{ inputs.PROJECT }} ${{ inputs.PROJECT }}
 
       - name: Publish NuGet package
         run: dotnet nuget push ./artifacts/${{ inputs.PROJECT }}/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.ZUPIT_NUGET_TOKEN }}
-
-      - name: Publish NuGet package test
-        run: echo "Publish to Nuget"

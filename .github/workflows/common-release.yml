@@ -33,6 +33,7 @@ jobs:
     if: needs.publish-new-version.outputs.OUTCOME == 'success'
     uses: ./.github/workflows/common-release-nuget.yml
     with:
+      COMMIT_SHA: ${{ needs.publish-new-version.outputs.COMMIT_SHA }}
       DOTNET_IMAGE: ${{ inputs.DOTNET_IMAGE }}
       WORKING_DIRECTORY: ${{ inputs.WORKING_DIRECTORY }}
       PROJECT: ${{ inputs.PROJECT }}
