@@ -48,6 +48,6 @@ var app = builder.Build();
 
 ...
 
-// Add the Prometheus endpoint
+// Add the Prometheus endpoint with token auth
 app.MapPrometheusEndpointWithToken();
 ```
