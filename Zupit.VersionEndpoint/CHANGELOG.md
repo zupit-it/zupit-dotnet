@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.0.0"></a>
+## [1.0.0](https://www.github.com/zupit-it/zupit-dotnet/releases/tag/v1.0.0) (2024-02-19)
+
+### Features
+
+* first prod-ready release ([a80434f](https://www.github.com/zupit-it/zupit-dotnet/commit/a80434f3a02aa808771576de57cbbbefe91d3291))
+
+### Breaking Changes
+
+* first prod-ready release ([a80434f](https://www.github.com/zupit-it/zupit-dotnet/commit/a80434f3a02aa808771576de57cbbbefe91d3291))
+
+### Other
+
+* checkout commit to release ([f53873d](https://www.github.com/zupit-it/zupit-dotnet/commit/f53873d03d49621cfec8e6b303add0723c89c174))
+* updated README ([369078a](https://www.github.com/zupit-it/zupit-dotnet/commit/369078a4b4ccfd19c43f215d2ae6edce2d17cab1))
+
 <a name="0.0.2"></a>
 ## [0.0.2](https://www.github.com/zupit-it/zupit-dotnet/releases/tag/v0.0.2) (2024-02-14)
 
