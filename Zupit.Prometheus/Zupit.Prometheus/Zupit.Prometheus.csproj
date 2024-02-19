@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Zupit.Prometheus</PackageId>
-    <Version>0.1.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Zupit Developers</Authors>
     <Company>Zupit</Company>
     <PackageTags>Prometheus;Metrics;Zupit</PackageTags>
